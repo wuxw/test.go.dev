@@ -42,17 +42,17 @@ func (self *Brower) encodeParams(params map[string]string) string   {
 	return paramsData.Encode()
 }
 
-func (self *Brower) SetProxyUrl(proxyUrl string)  {
+/*func (self *Brower) SetProxyUrl(proxyUrl string)  {
 	proxy := func(_ *http.Request ) (*url.URL, error) {
 		return url.Parse(proxyUrl)
 	}
 	transport := & http.Transport{Proxy:proxy}
 	self.client.Transport = transport
-}
+}*/
 
-func (self *Brower) AddCookie(cookies []*http.Cookie)  {
+/*func (self *Brower) AddCookie(cookies []*http.Cookie)  {
 	self.cookies = append(self.cookies, cookies...)
-}
+}*/
 
 func (self *Brower) GetCookie() ([]*http.Cookie) {
 	return self.cookies
