@@ -64,6 +64,7 @@ func newGrpc() *grpc.Server {
     }
     server := grpc.NewServer(opts...)
     pb.RegisterHelloWorldServer(server, NewHelloService())
+    pb.RegisterUserFindServer(server, NewUserService())
     return server
 }
 func newGateway() (http.Handler, error) {
@@ -75,6 +76,10 @@ func newGateway() (http.Handler, error) {
     dopts := []grpc.DialOption{grpc.WithTransportCredentials(dcreds)}
     gwmux := runtime.NewServeMux()
     if err := pb.RegisterHelloWorldHandlerFromEndpoint(ctx, gwmux, EndPoint, dopts); err != nil {
+        return nil, err
+    }
+
+    if err := pb.RegisterUserFindHandlerFromEndpoint(ctx, gwmux, EndPoint, dopts); err != nil {
         return nil, err
     }
     return gwmux, nil
